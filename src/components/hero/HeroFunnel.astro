@@ -1,0 +1,69 @@
+---
+const { hero, slug } = Astro.props;
+const hasBgImage = hero?.media?.video_preview;
+
+function getAspectClass() {
+    if (hero.media.aspect == 0.5625) return "aspect-9/16";
+    return "";
+}
+---
+
+{hero && (
+    <div
+        class={`hero-funnel parallax-wrap relative ${
+            hero?.style?.surface || "surface-dark"
+        } ${hero?.style?.class || ""} ${hero?.style?.layout || ""} ${hero?.style?.media || ""}`}
+        transition:name={`hero_${slug || Math.random()}`}
+        id="header">
+        <div class={`parallax pointer-events-none absolute inset-0 bg-${hero?.style?.background || ""}`} />
+        {hero?.style?.pattern && <div class="parallax absolute inset-0" style={`${hero?.style?.pattern || ""}  `} />}
+        {hasBgImage && (
+            <div class="media parallax absolute inset-0">
+                <div class="video-background">
+                    <video autoplay muted loop class="video-content">
+                        <source src={hero.media.video_preview} type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        )}
+
+        <div class="relative z-10 grid aspect-auto place-items-center">
+            <div class={`container-${hero?.style?.container || "xl"} py-80 ${getAspectClass()}`}>
+                <div class="text-center">
+					<h1 class="text-5xl font-bold">{hero.title}</h1>
+					<div class="mt-4 text-xl">{hero.intro}</div>
+					<div class="mt-8">{hero?.slot}</div>
+				</div>
+            </div>
+        </div>
+    </div>
+)}
+
+<style>
+    .hero-funnel {
+        @apply h-screen;
+    }
+    .video-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+		color: var(--color-primary);
+        z-index: -1; /* Ensure it is behind other content */
+    }
+
+    .video-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+		color: var(--color-secondary);
+		opacity: 0.7;
+        transform: translate(-50%, -50%);
+    }
+</style>
