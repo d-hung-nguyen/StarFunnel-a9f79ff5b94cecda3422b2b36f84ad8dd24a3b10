@@ -62,7 +62,10 @@
   font-style: var(--popper-theme-border-style)
 }
 html {
-  font-size: 1.125rem;
+  line-height: 1.5;
+  font-size: 18px;
+  
+  
 }
 
 body {
@@ -162,6 +165,8 @@ body {
 p {
   @apply tracking-tighter;
   font-family: "Ralway", sans-serif;  
+  line-height: 1.5;
+  max-width: 60ch ;
 } 
 
 .container {
@@ -295,6 +300,8 @@ p {
   h4,
   h5,
   h6 {
+    max-width: 60ch;
+    line-height: 1.5;
     font-variation-settings: var(--font-var-settings-headings);
     @apply leading-snug tracking-tighter;
   }
@@ -638,4 +645,15 @@ select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
   -webkit-text-fill-color: theme(colors.primary);
   transition: background-color 5000s ease-in-out 0s;
+}
+
+article {
+  @apply relative;
+  max-width: 60ch;
+  line-height: 1.5em;
+}
+
+pre {
+  max-width: 60ch;
+  line-height: 1.5em;
 }

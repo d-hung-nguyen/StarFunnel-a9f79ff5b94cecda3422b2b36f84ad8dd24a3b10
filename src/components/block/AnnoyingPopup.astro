@@ -9,23 +9,24 @@ import Button from "@components/navigation/Button.astro";
 
 const { content, link, code, media, buttons, style, timing, newsletter } =
   Astro.props;
-const { slot, ...props } = Astro.props;
-let newsletterItem;
+let newsletterItem: any;
 const renderedContent = marked.parse(content);
 
 if (newsletter) {
   const contact = await getEntry("config", "contact");
 
-  newsletterItem = contact.data.newsletter.list
-    .filter((list) => list.link === newsletter)
-    .pop();
+  if (contact.data.newsletter && contact.data.newsletter.list) {
+    newsletterItem = contact.data.newsletter.list
+      .filter((list) => list.link === newsletter)
+      .pop();
+  }
 }
 ---
 
 {
   timing.on_load && (
     <>
-      <Popup
+   
         client:idle
         data={timing}
         {link}
@@ -48,12 +49,11 @@ if (newsletter) {
             style="--animation-delay: 0.6s"
             class={`fade-up relative z-10 inline-flex flex-wrap gap-4 py-8`}
           >
-            {buttons.map((btn) => (
+            {buttons.map((btn: any) => (
               <Button {...btn} />
             ))}
           </div>
         )}
-
         <div
           class="absolute inset-0 z-0"
           style={`opacity: ${media.image_opacity}`}
@@ -87,7 +87,7 @@ if (newsletter) {
             />
           )}
         </div>
-      </Popup>
+  
     </>
   )
 }

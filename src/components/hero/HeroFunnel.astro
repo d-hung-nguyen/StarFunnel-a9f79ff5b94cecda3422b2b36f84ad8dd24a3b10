@@ -3,7 +3,7 @@ const { hero, slug } = Astro.props;
 const hasBgImage = hero?.media?.video_preview;
 
 function getAspectClass() {
-    if (hero.media.aspect == 0.5625) return "aspect-9/16";
+    if (hero.media.aspect == 0.5625) return "aspect-16-10";
     return "";
 }
 ---
@@ -22,7 +22,6 @@ function getAspectClass() {
                 <div class="video-background">
                     <video autoplay muted loop class="video-content">
                         <source src={hero.media.video_preview} type="video/mp4" />
-                        Your browser does not support the video tag.
                     </video>
                 </div>
             </div>
@@ -42,27 +41,22 @@ function getAspectClass() {
 
 <style>
     .hero-funnel {
-        @apply h-screen;
+        @apply min-h-screen;
     }
     .video-background {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
         overflow: hidden;
-		color: var(--color-primary);
+		background-color: var(--color-primary);
         z-index: -1; /* Ensure it is behind other content */
     }
 
     .video-content {
-        position: absolute;
-        top: 50%;
+        position: fixed;
+        top:0%;
         left: 50%;
-        width: 100%;
         height: 100%;
+        width: 100%;
         object-fit: cover;
-		color: var(--color-secondary);
+		color: var(--color-primary);
 		opacity: 0.7;
         transform: translate(-50%, -50%);
     }
