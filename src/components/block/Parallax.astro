@@ -3,104 +3,108 @@ import { marked } from "marked";
 
 const { content, parallax, style } = Astro.props;
 ---
-<div
-  class={`container-${style.container} fade-up rounded-md features grid gap-8`}
->
-  {content && <div set:html={marked.parse(content)} class="richtext fade-up" />}
+return (
+  <div
+    class={`container-${style.container} fade-up rounded-md features grid
+gap-8`}
+  >
+    {content && (
+      <div set:html={marked.parse(content)} class="richtext fade-up" />
+    )}
 
-{ parallax && (
-  <div class="accent-m01-rotation-wrapper">
-    <div class="accent-c08-wrapper">
-      <div class="accent-c08-line-wrapper _01">
-        <div class="accent-c08-content">
-          <div class="accent-c08-text">Expertise/</div>
-          <div class="accent-c08-text">Expertise/</div>
-                </div>
-              </div>
+    {parallax && (
+      <div class="accent-m01-rotation-wrapper">
+        <div class="accent-c08-wrapper">
+          <div class="accent-c08-line-wrapper _01">
+            <div class="accent-c08-content">
+              <div class="accent-c08-text">Expertise/</div>
+              <div class="accent-c08-text">Expertise/</div>
             </div>
           </div>
-        )}
+        </div>
+
         <div class="accent-c08-content">
           <div class="accent-c08-text">Expertise/</div>
           <div class="accent-c08-text">Expertise/</div>
         </div>
       </div>
-      <div class="accent-c08-line-wrapper _02">
-        <div class="accent-c08-content">
-          <div class="accent-c08-text">Bespoke/</div>
-          <div class="accent-c08-text">Bespoke/</div>
-        </div>
-        <div class="accent-c08-content">
-          <div class="accent-c08-text">Bespoke/</div>
-          <div class="accent-c08-text">Bespoke/</div>
-        </div>
-                </div>
-              </div>
-            </div>
+    )}
+    
+    {parallax && (
+      <>
+        <div class="accent-c08-line-wrapper _02">
+          <div class="accent-c08-content">
+            <div class="accent-c08-text">Bespoke/</div>
+            <div class="accent-c08-text">Bespoke/</div>
           </div>
-          )}
+
+          <div class="accent-c08-content">
+            <div class="accent-c08-text">Bespoke/</div>
+            <div class="accent-c08-text">Bespoke/</div>
+          </div>
         </div>
+      </>
+    )}
 
-
-
-
-  <style>
-    .accent-m01-rotation-wrapper {
-      display: flex;
-      align-items: center;
-      width: 100%;
-      position: sticky;
-      top: 0;
-      font-size: 20px;
-      font-family: "Alta", sans-serif;
-      line-height: 2.2;
-      text-align: center;
-    }
-
-    .accent-c08-wrapper {
-      overflow: hidden;
-      width: 100%;
-    }
-
-    .accent-c08-line-wrapper {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      width: 300vw;
-      position: relative;
-      animation: move-horizontal 10s linear infinite;
-    }
-
-    .accent-c08-line-wrapper._02 {
-      animation-direction: reverse;
-    }
-
-    .accent-c08-content {
-      display: flex;
-    }
-
-    .accent-c08-text {
-      color: #d3cfca;
-      text-transform: uppercase;
-      text-shadow: 1px 0 1px #e5e1dc, -1px -1px 1px #aaa6a0;
-      margin-top: 30px;
-      margin-right: 35px;
-      font-size: 16vw;
-      line-height: 1;
-    }
-
-    @keyframes move-horizontal {
-      from {
-        transform: translateX(-50%);
+    <style>
+      .accent-m01-rotation-wrapper {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        position: sticky;
+        top: 0;
+        font-size: 20px;
+        font-family: "Alta", sans-serif;
+        line-height: 2.2;
+        text-align: center;
       }
-      to {
-        transform: translateX(50%);
-      }
-    }
 
-    html, body {
-      font-family: "Alta", sans-serif;
-      background-color: #d3cfca;
-    }
-  </style>
-</div>
+      .accent-c08-wrapper {
+        overflow: hidden;
+        width: 100%;
+      }
+
+      .accent-c08-line-wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 300vw;
+        position: relative;
+        animation: move-horizontal 10s linear infinite;
+      }
+
+      .accent-c08-line-wrapper._02 {
+        animation-direction: reverse;
+      }
+
+      .accent-c08-content {
+        display: flex;
+      }
+
+      .accent-c08-text {
+        color: #d3cfca;
+        text-transform: uppercase;
+        text-shadow: 1px 0 1px #e5e1dc, -1px -1px 1px #aaa6a0;
+        margin-top: 30px;
+        margin-right: 35px;
+        font-size: 16vw;
+        line-height: 1;
+      }
+
+      @keyframes move-horizontal {
+        from {
+          transform: translateX(-50%);
+        }
+        to {
+          transform: translateX(50%);
+        }
+      }
+
+      html, body {
+        font-family: "Alta", sans-serif;
+        background-color: #d3cfca;
+      }
+    </style>
+  </div>
+);
+```

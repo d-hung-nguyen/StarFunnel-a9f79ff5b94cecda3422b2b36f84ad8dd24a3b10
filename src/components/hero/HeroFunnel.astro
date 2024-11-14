@@ -1,5 +1,5 @@
 ---
-const { hero, slug } = Astro.props;
+const { hero } = Astro.props;
 const hasBgImage = hero?.media?.video_preview;
 
 function getAspectClass() {
@@ -11,19 +11,22 @@ function getAspectClass() {
 {hero && (
     <div
         class={`hero-funnel parallax-wrap relative ${
-            hero?.style?.surface || "surface-dark"
+            hero?.style?.surface || ""
         } ${hero?.style?.class || ""} ${hero?.style?.layout || ""} ${hero?.style?.media || ""}`}
-        transition:name={`hero_${slug || Math.random()}`}
         id="header">
-        <div class={`parallax pointer-events-none absolute inset-0 bg-${hero?.style?.background || ""}`} />
-        {hero?.style?.pattern && <div class="parallax absolute inset-0" style={`${hero?.style?.pattern || ""}  `} />}
+
         {hasBgImage && (
             <div class="media parallax absolute inset-0">
-                <div class="video-background">
-                    <video autoplay muted loop class="video-content">
-                        <source src={hero.media.video_preview} type="video/mp4" />
-                    </video>
-                </div>
+             
+                   <video
+                    class="video-background"
+                    autoplay
+                    loop
+                    muted
+                    playsinline
+          
+                    src={"/video/hamster_coder.mp4"}
+                   />
             </div>
         )}
 
@@ -45,19 +48,14 @@ function getAspectClass() {
     }
     .video-background {
         overflow: hidden;
-		background-color: var(--color-primary);
         z-index: -1; /* Ensure it is behind other content */
     }
 
     .video-content {
         position: fixed;
-        top:0%;
-        left: 50%;
-        height: 100%;
-        width: 100%;
-        object-fit: cover;
-		color: var(--color-primary);
-		opacity: 0.7;
+        top:50%;
+        left:50%;
+		opacity: 0.5;
         transform: translate(-50%, -50%);
     }
 </style>
